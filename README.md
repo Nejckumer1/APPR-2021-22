@@ -7,6 +7,7 @@ Vzorčni repozitorij za projekt pri predmetu APPR v študijskem letu 2021/22.
 ### Analiza športno-vzgojnih kartonov
 
 Analiziral bom športno-vzgojne kartone osnovnošolcev, pri čemer bom za parametre analize vzel:
+- vse panoge športno-vzgojnega kartona,
 - spol otroka,
 - starost otroka,
 - leto testiranja.
