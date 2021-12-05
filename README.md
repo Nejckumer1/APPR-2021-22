@@ -4,6 +4,8 @@ Vzorčni repozitorij za projekt pri predmetu APPR v študijskem letu 2021/22.
 
 ## Tematika
 
+### Analiza športno-vzgojnih kartonov
+
 Analiziral bom športno-vzgojne kartone osnovnošolcev.
 
 ## Program
