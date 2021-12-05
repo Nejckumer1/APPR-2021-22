@@ -12,6 +12,7 @@ Analiziral bom športno-vzgojne kartone osnovnošolcev, pri čemer bom za parame
 - leto testiranja.
 
 Podatke sem pridobil v arhivu Fakultete za šport v Ljubljani, cilj analize pa je pregled in razlike v dosežkih osnovnošolcev
+v preteklih letih,
 ter okvirna napoved gibalno-fizičnih sposobnosti otrok v prihodnjih letih.
 
 ## Program
