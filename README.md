@@ -16,6 +16,9 @@ Podatke sem pridobil v arhivu Fakultete za šport v Ljubljani, cilj analize pa j
 v preteklih letih,
 ter okvirna napoved gibalno-fizičnih sposobnosti otrok v prihodnjih letih.
 
+Za analizo prostorske komponente in izris zemljevida Evrope, sem iz spletnega naslova https://ncdrisc.org/data-downloads-adiposity-ado.html
+pridobil še podatke o povprečnem BMI(body mass index) otrok po vseh državah Evrope.
+
 ## Program
 
 Glavni program in poročilo se nahajata v datoteki `projekt.Rmd`.
