@@ -40,7 +40,6 @@ graf_0 = sportni_kart %>% filter(spol=="fantje", vrsta == "povprecje", leto != "
     axis.line.y =  element_line(color = 'black')
   )
 
-
 # graf 1 prikazuje preminjanje povprečne višine za fante in punce posebej
 
 graf_1 = sportni_kart %>% filter(spol!="fantje_in_punce", vrsta == "povprecje", leto != "vsa_leta", razred != "vsi_razredi_skupaj") %>%
@@ -120,6 +119,7 @@ graf_2_1 = sportni_kart %>% filter(spol!="fantje_in_punce", vrsta == "povprecje"
 
 #Graf 2_2 prikazuje spreminjanje teze in visine za fante in punce skupaj
 graf_2_2 = sportni_kart %>% filter(spol == "fantje_in_punce", vrsta == "povprecje", leto != "vsa_leta", razred != "vsi_razredi_skupaj") %>%
+  mutate(teza=teza/10,visina=visina/10)%>%
   ggplot(
     mapping = aes(x = razred, y = leto )
   ) +
@@ -515,3 +515,93 @@ graf_zemljevid_punce = podatki_zemljevid_2 %>% filter(splo == "Girls", leto==201
   geom_path(data = right_join(podatki_zemljevid_2, zemljevid, by = "drzava"),
             aes(x = long, y = lat, group = group), 
             color = "white", size = 0.1)
+
+
+#################################################################################
+# Graf za tretji tip podatkov
+#################################################################################
+
+#najprej uvozimo podatke
+podatki_svec = read_csv("podatki/podatki_svecniki")
+
+df = podatki_svec
+
+
+# Dodamo stolpec sprememba, da vidimi ali je sla cena gor ali dol
+df$sprememba <- ifelse(df$Close > df$Open, "up", ifelse(df$Close < df$Open, "down", "flat"))
+
+#Da bomo lahko narisali svecnike moramo definirati sirino svecnikov
+sirina <- c(as.numeric(difftime(df$Date[2], df$Date[1]), units = "secs"), 
+            as.numeric(difftime(df$Date[3], df$Date[2]), units = "secs"), 
+            as.numeric(difftime(df$Date[4], df$Date[3]), units = "secs"))
+
+# Da je enaka sirina za vse
+df$sirina_svec = min(sirina)
+
+# Definiramo barv svecnikov
+barva_svecnikov = c("down" = rgb(192,0,0,alpha=255,maxColorValue=255), 
+                    "up" = rgb(0,192,0,alpha=255,maxColorValue=255), 
+                    "flat" = rgb(0,0,192,alpha=255,maxColorValue=255))
+
+#narisemo graf
+graf_svec = df %>% ggplot(aes(x=Date, y = Close))+
+  geom_linerange(aes(ymin=Low, ymax=High, colour = sprememba),
+                 alpha = 1) +  
+  theme_bw() +
+  labs(title="Graf gibanja BTC-USDT",
+       subtitle = "Svečniki so eno urni") +
+  geom_rect(aes(xmin = Date - sirina_svec/2 * 0.9, 
+                xmax = Date + sirina_svec/2 * 0.9, 
+                ymin = pmin(Open, Close), 
+                ymax = pmax(Open, Close),
+                fill = sprememba),
+            alpha = 1) +                            
+  guides(fill = "none", colour = "none" ) +                     
+  scale_color_manual(values = barva_svecnikov) +  
+  scale_fill_manual(values = barva_svecnikov) +
+  theme(
+    panel.border = element_blank()
+  ) + 
+  labs(
+    y = "Cena BTC v USDT", x = "") +
+  theme(
+    axis.line.y = element_line(color = 'black'))+
+  coord_x_datetime(xlim = c("2022-01-15 00:00:00", "2022-05-15 00:00:00"))+
+  scale_y_continuous(
+    labels = scales::number_format(accuracy = 0.01,
+                                   decimal.mark = ','))
+
+
+#graf volumna
+vol = df %>% 
+  ggplot(mapping = aes(x=Date, y = Volume, fill =sprememba)) +
+  geom_bar(
+    stat = "identity")+
+  theme_bw()+
+  scale_color_manual(values = barva_svecnikov) +  # color for line
+  scale_fill_manual(values = barva_svecnikov)+
+  theme(
+    panel.border = element_blank(),
+    legend.position = "none"
+  ) +
+  labs(title= "Volumen",
+       y = "Volumen", x = "Čas")+
+  theme(axis.line.x = element_line(color = 'black'),
+        axis.line.y = element_line(color = 'black'))+
+  coord_x_datetime(xlim = c("2022-01-15 00:00:00", "2022-05-15 00:00:00"))+
+  scale_y_continuous(
+    labels = scales::number_format(accuracy = 0.1,
+                                   decimal.mark = ','))
+
+
+#koncen graf, ki je skupen
+
+svecniki_in_volumen = grid.arrange(graf_svec, vol, nrow =2)
+
+
+
+
+
+
+
+

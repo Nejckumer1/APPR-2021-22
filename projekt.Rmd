@@ -27,13 +27,144 @@ source("lib/libraries.r", encoding="UTF-8")
 ```{r uvoz}
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
+Uvozili smo tri vrste podatkov. 
+- Prvi podatki vsebujejo indekse telesne teže (ITT) za učenke in učence iz različnih držav Evrope. Dobili smo jih v *csv* obliki.
+- Drugi podatki predstavljajo športne kartone za otroke osnovne šole v Sloveniji. Dobili smo jih v *xlsx* obliki.
+- Tretji podatki niso povezani z našim projektom in smo jih uvozili z namenom, da dobimo podatke še v drugačni obliki. Predstavljajo gibanje 
+tečaja BTC (Bitcoin) in USDT(Tether). Pridobili smo jih s [API-jem borze kriptovalut Binance](https://www.binance.com/en/binance-api).
 
+Vse oblike podatkov smo obdelali tako, da smo dobili obliko, ki je primerna za vizualizacijo.
 ***
 
 ## Analiza in vizualizacija podatkov
+Cilj analize podatkov je bil prikazati kako so se rezultati posameznih disciplin na športnem kartonu spreminjali skozi leta in za vsak razred posebej.
+Dobili smo osnovnošolske športne kartone, torej imamo od 1. do 9. razreda, ter od leta 2009 do 2021. Vključeni so tudi podatki, ki so bili izmerjeni v času COVID-a, zato bo zanimivo videti, kakšne spremembe so vidne v tem obdobju.
+
+
 
 ```{r vizualizacija, results='hide'}
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+```
+
+Pri prvem grafu opazujemo spreminjanje povprečne višine fantov za časovno obdobje od leta 2009 do 2021. Opazimo, da se povprečna višina s starostjo otrok veča dokaj linearno, omeniti velja le, da v povprečju fantje zrastejo največ v sedmem oziroma osmem razredu. Prav tako je iz grafa razvidno tudi, da se je povprečna višina v celotnem časovnem obdobju rahlo povečala, kar se v obdobju nekaj let ne bi videlo jasno. 
+```{r graf_0, echo=FALSE, fig.align='center'}
+graf_0
+```
+
+Naslednji graf vsebuje več grafov, ki prikazujejo povprečno višino fantov in punc skozi leta, za vsak razred posebej. Iz grafa lahko opazimo, da 
+je višina fantov in punc dokaj enaka v nižjih razredih, nato pa so fantje v višjih razredih vedno višji od punc, pri čemer se razlika povečuje.
+```{r graf_1, echo=FALSE, fig.align='center'}
+graf_1
+```
+
+
+Ta graf prikazuje spreminjanje povprečne teže fantov in punc. Prav tako je predstavljena skozi leta in za vsak razred posebej. Enako kot pri povprečni višini, velja za povprečno težo. Torej od 1. do 6. razreda je povprečna teža fantov in punc skoraj enaka, od 7. do 9. razreda pa se razlika stopnjuje, kjer so fantje vedno težji od punc.
+```{r graf_2, echo=FALSE, fig.align='center'}
+graf_2
+```
+
+Spodnji graf je sestavljen ponovno iz večih grafov, kjer posamezen graf sedaj prikazuje spreminjanje povprečne teže fantov in punc od 1. do 9. razreda. To naredimo za leta od 2010 do 2021. Graf smo narisali zato, da se bolj jasno vidi kako se razlika med težama fantov in punc spreminja od 1. do 9. razreda. Pridemo do enakega zaključka kot pri zgornjem grafu, torej da se razlika povečuje. Prav tako pri teži velja podobno kot pri višini, in sicer da se le ta s starostjo otroka veča približno linearno.
+```{r graf_2_1, echo=FALSE, fig.align='center'}
+graf_2_1
+```
+
+
+Na tem grafu lahko opazujemo spreminjanje teže(predstavljena z barvo kroga) in višine(predstavljena z velikostjo kroga) za oba spola po razredih. Vidimo, da se podatki za vsa leta med sabo razlikujejo minimalno, kar pomeni, da se v obdobju zadnjih trinajstih let povprečna teža in višina nista dosti spremenili. 
+```{r graf_2_2, echo=FALSE, fig.align='center'}
+graf_2_2
+```
+
+Namen spodnjega grafa je predstavitev razmerja med telesno težo in višino, kjer ugotovimo, da v nižjih razredih med obema spoloma ni velike razlike, v višjih razredih pa so krogi fantov obarvani temneje kot pri puncah, kar pomeni večji kvocient razmerja med težo in višino. Ugotovimo, da je to posledica večje teže in prav tako tudi višine pri fantih.
+```{r graf_2_3, echo=FALSE, fig.align='center'}
+graf_2_3
+```
+
+Spodnja serija grafov predstavlja podatke o kožni gubi osnovnošolcev. Tu je zanimivo, da v vseh razredih prednjačijo punce, pri čemer je razlika v višjih razredih vedno večja. Razlog takih ugotovitev je najbrž rezultat dejstva o manjši mišični masi punc v primerjavi s fanti.
+```{r graf_3, echo=FALSE, fig.align='center'}
+graf_3
+```
+
+Ta graf predstavlja razmerje med kožno gubo in telesno višino in težo za oba spola. Vidimo, da se funkcija grafa za punce precej razlikuje od funkcije grafa fantov. Razlog je bolj ali manj enak ugotovitvam iz prejšnjega grafa.
+```{r graf_3_2, echo=FALSE, fig.align='center'}
+graf_3_2
+```
+
+
+Naslednji graf predstavlja dotikanje plošče z roko, ki ocenjuje motoriko in odzivnost osnovnošolcev.
+```{r graf_4, echo=FALSE, fig.align='center'}
+graf_4
+```
+Po pričakovanjih so rezultati podobni za oba spola, prav tako linearno raste število dotikov v odvisnosti z razvojem otroka. 
+
+
+Za razliko od prejšnjega grafa, kjer razlika med spoloma ni tako očitna, v spodnjem grafu skoka v daljino opazimo, da dosegajo fantje boljše rezultate že od začetka šolanja. Ta razlika se z razvojem otroka le še povečuje, kar jasno vidimo tudi na grafu in sicer tako, da sta rumena in zelena linija vedno bolj ločeni.
+```{r graf_5, echo=FALSE, fig.align='center'}
+graf_5
+```
+
+
+Spretnost otrok se ocenjuje z disciplino imenovano premagovanje ovir nazaj, katere rezultati so predstavljeni v naslednjem grafu. Cilj te vaje je premagati vse ovire v čim krajšem času. V grafu se boljši rezultat kaže v tem, da je funkcija pomaknjena bližje abscisi.
+```{r graf_6, echo=FALSE, fig.align='center'}
+graf_6
+```
+Pri tem grafu je prvič do sedaj pregledanih grafih tudi lepo razviden preskok funkcij po letu 2019, in sicer vidimo da so se povprečni časi po tem letu drastično povečali. Razlog za ta pojav, je epidemija Covid-19, kjer se je spretnost osnovnošolcev v času karantene precej zmanjšala.
+
+
+Naslednja disciplina so trebušnjaki, zajeti pa so v spodnjem grafu. Pri rezutatih le-teh ni posebnosti, vse ugotovitve se skladajo z že znanimi. 
+```{r graf_7, echo=FALSE, fig.align='center'}
+graf_7
+```
+
+
+Zanimivo si bo ogledati naslednji graf, kjer opazujemo gibljivost osnovnošolcev. Tu je posebnost, da so za razliko od večine ostalih disciplin tu punce v vseh letih boljše od fantov, kar posledično pomeni tudi bolj gibljive. Razlika se z leti le povečuje.
+```{r graf_8, echo=FALSE, fig.align='center'}
+graf_8
+```
+
+
+Moč otroka se meri v vesi v zgibi, kjer je cilj vaje, da se posameznik kar se da dolgo drži na drogu.
+```{r graf_9, echo=FALSE, fig.align='center'}
+graf_9
+```
+V zgornjih rezultatih je spet lepo razviden padec grafa v rezultatih po letu 2019, razlog pa je enak kot pri premagovanju ovir nazaj. Sklepamo lahko, da so v času epidemije otroci izgubili tudi na moči ne samo na gibljivosti.
+
+
+Za analizo sta nam do konca ostala le še teka, in sicer na 60 in 600 metrov, ki sta predstavljena v naslednjih dveh serijah grafov.
+```{r graf_10, echo=FALSE, fig.align='center'}
+graf_10
+```
+Pri krajših tekih, kjer je poglavitnega pomena hitrost, ni večjih posebnosti, kot po pravilu fantje dosegajo nekoliko boljše rezultate.
+
+
+Zadnji graf smo oblikovali nekoliko drugače kot prejšnje, in sicer so tukaj grafi ločeni glede na leto ne pa glede na razred kot je bilo to navadno v prejšnjih grafih.
+```{r graf_11, echo=FALSE, fig.align='center'}
+graf_11
+```
+
+
+
+**Zemljevid**
+Zemljevide smo narisali za prve podatke, kjer je podan povprečni indeks telesne teže (ITT) za evropske države. Povprečen ITT je bil podan posebej za fante in punce, starostih stopenj od 5 do 19 let ter za leta 2000 do 2019. Mi smo izbrali starostno skupino 19 in leto 2019. Ločili pa smo na fante in punce.
+
+Zemljevid spodaj predstavlja ITT fantov. Opazimo lahko, da je ITT v Belgiji najnižji izmed vseh evropskih držav. Držav z visokim ITT pa je več in sicer najvišje imajo Ciper, Andora in Srbija.
+```{r graf_zemljevid_fantje, echo=FALSE, fig.align='center'}
+graf_zemljevid_fantje
+```
+
+
+Zemljevid spodaj predstavlja ITT punc in se močno razlikuje od zgornjega. Pri puncah ima najnižji ITT Romunija, medtem ko ima Belgija relativno visokega. Najvišji ITT pa ima Velika Britanija.
+```{r graf_zemljevid_punce, echo=FALSE, fig.align='center'}
+graf_zemljevid_punce
+```
+
+
+
+
+
+
+Spodnji graf ni povezan s projektom in analizo, ki smo jo naredili zgoraj. Sestavljen je iz dveh grafov. Zgornji predstavlja gibanja tečaja BTC (Bitcoin) - USDT(Tether) za obdobje od 15.1.2022 do 15.5.2022. Tečaj je predstavljen z japonskimi svečniki, ki povzamejo gibanje cene za časovni interval 1 dan. Spodnji graf predstavlja volumen oz. količino valute, ki je bila prenešena v transakcijah. Iz grafa lahko opazimo, da je bil tečaj relativno stabilen v tem obdobju. Večja sprememba se je zgodila le v sredini maja, ko je vrednost BTC močno padla. Opazimo tudi, da takrat prišlo do povišane količine prodaje BTC, kar je tudi razlog za padec. 
+```{r svecniki_in_volumen, echo=FALSE, fig.align='center'}
+svecniki_in_volumen
 ```
 
 ***
@@ -47,5 +178,5 @@ source("analiza/analiza.r", encoding="UTF-8")
 ***
 
 ```{r shiny}
-#shinyAppDir("shiny", options=list(width="100%", height=600))
+shinyAppDir("shiny", options=list(width="100%", height=600))
 ```

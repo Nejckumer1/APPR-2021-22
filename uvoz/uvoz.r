@@ -132,3 +132,15 @@ podatki = function(interval, startTime, endTime){
 }
 
 podatki_svecniki = podatki("1d",1640959200000,1654977267000)
+write_csv(podatki_svecniki,"podatki/podatki_svecniki")
+
+
+
+
+
+
+
+
+
+
+

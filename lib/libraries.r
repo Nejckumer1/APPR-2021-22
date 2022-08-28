@@ -24,7 +24,7 @@ library(readxl)
 library(gridExtra)
 library(ggnewscale)
 library(tidyquant)
-\library(quantmod)
+library(quantmod)
 library(RColorBrewer)
 
 library(foreach) 
