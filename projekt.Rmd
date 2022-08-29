@@ -1,6 +1,6 @@
 ---
-title: "Poročilo pri predmetu Analiza podatkov s programom R"
-author: "Študent FMF"
+title: "Analiza športno-vzgojnih kartonov osnovnošolcev v Sloveniji"
+author: "Nejc Kumer"
 output:
   html_document: default
   pdf_document:
